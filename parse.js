@@ -4,26 +4,6 @@ const http = require('http');
 const { JSDOM } = require('jsdom');
 const async = require('async');
 const fs = require('fs');
-
-// Parse gospel quotes from website into storage file.
-makeRequest()
-    .then(function() {
-        const storageFilePath = __dirname + '/storage.json';
-        fs.writeFile(storageFilePath, JSON.stringify(storage, null, 4), function(err) {
-            if (err) {
-                console.log(err);
-                return;
-            } else {
-                console.log('Storage being updated.');
-                return;
-            }
-        })
-    });
-// The site is used to parse gospel quotes from.
-const gospelHost = 'www.patriarchia.ru';
-// This variable will consist of all data retrieved from gospel's site.
-// TODO: put that into promise as resolve response.
-const storage = [];
 // Exact pages to parse.
 // URL is like <gospelHost>/<path>/<i>, i = 0..<quantity>. Also we collect type and title of gospel book the quote took from.
 const sources = [
@@ -58,6 +38,25 @@ const sources = [
         quantity: 40
     }
 ];
+// Parse gospel quotes from website into storage file.
+makeRequest()
+    .then(function() {
+        const storageFilePath = __dirname + '/storage.json';
+        fs.writeFile(storageFilePath, JSON.stringify(storage, null, 4), function(err) {
+            if (err) {
+                console.log(err);
+                return;
+            } else {
+                console.log('Storage being updated.');
+                return;
+            }
+        })
+    });
+// The site is used to parse gospel quotes from.
+const gospelHost = 'www.patriarchia.ru';
+// This variable will consist of all data retrieved from gospel's site.
+// TODO: put that into promise as resolve response.
+const storage = [];
 /**
  * Makes all needed HTTP requests to the website where all gospel quotes are stored.
  * @return {Promise}
