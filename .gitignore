@@ -1,0 +1,8 @@
+# Common self-explanatory stuff to ignore.
+.idea
+node_modules
+# Ignore file used as storage for gospel quotes.
+storage.json
+# Ignore all credential file except examples.
+credentials
+!credentials/example
