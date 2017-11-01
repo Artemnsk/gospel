@@ -2,6 +2,7 @@
 
 const express = require('express');
 const app = express();
+const publicCredentials = require('./credentials/public');
 
 // var Slack = require('slack-node');
 // const apiToken = "<>";
@@ -11,7 +12,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.use(require('./controllers'));
 
-if (false) {
+if (publicCredentials.useSSL) {
     const letsEncryptGateway = 'https://acme-v01.api.letsencrypt.org/directory';
     const lex = require('greenlock-express').create({
         server: letsEncryptGateway,
