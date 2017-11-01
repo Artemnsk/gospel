@@ -5,49 +5,19 @@ const { JSDOM } = require('jsdom');
 const async = require('async');
 const fs = require('fs');
 // Exact pages to parse.
-// URL is like <gospelHost>/<path>/<i>, i = 0..<quantity>. Also we collect type and title of gospel book the quote took from.
-const sources = [
-    {
-        type: 'Новый Завет',
-        title: 'Евангелие от Матфея',
-        path: "/bible/mf/",
-        quantity: 28
-    },
-    {
-        type: 'Новый Завет',
-        title: 'Евангелие от Марка',
-        path: "/bible/mk/",
-        quantity: 16
-    },
-    {
-        type: 'Новый Завет',
-        title: 'Евангелие от Луки',
-        path: "/bible/lk/",
-        quantity: 24
-    },
-    {
-        type: 'Ветхий Завет',
-        title: 'Бытие',
-        path: "/bible/gen/",
-        quantity: 50
-    },
-    {
-        type: 'Ветхий Завет',
-        title: 'Исход',
-        path: "/bible/ex/",
-        quantity: 40
-    }
-];
+// URL is like <gospelHost>/<path>/<i>, i = 1..<quantity>. Also we collect type and title of gospel book the quote took from.
+const sources = require('./sources');
 // Parse gospel quotes from website into storage file.
 makeRequest()
     .then(function() {
+        console.log("PARSING COMPLETED...");
         const storageFilePath = __dirname + '/storage.json';
         fs.writeFile(storageFilePath, JSON.stringify(storage, null, 4), function(err) {
             if (err) {
                 console.log(err);
                 return;
             } else {
-                console.log('Storage being updated.');
+                console.log('STORAGE BEING UPDATED.');
                 return;
             }
         })
@@ -62,6 +32,7 @@ const storage = [];
  * @return {Promise}
  */
 function makeRequest() {
+    console.log("START PARSING...");
     let promisesChain = new Promise(function(resolve, reject) {
         resolve();
     });
@@ -116,6 +87,7 @@ function makeSingleRequest(path, type, title) {
                             content: content
                         });
                     }
+                    console.log("PARSED: " + type + ": " + title);
                     // Finally resolve promise.
                     resolve();
                 }
@@ -123,6 +95,7 @@ function makeSingleRequest(path, type, title) {
         });
         // Reject on request error.
         req.on('error', function(err) {
+            console.log("ERROR: " + type + ": " + title);
             reject(err);
         });
         req.end();
