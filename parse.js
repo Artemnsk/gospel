@@ -87,7 +87,7 @@ function makeSingleRequest(path, type, title) {
                             content: content
                         });
                     }
-                    console.log("PARSED: " + type + ": " + title);
+                    console.log("PARSED: " + type + ": " + title + " PATH: " + path);
                     // Finally resolve promise.
                     resolve();
                 }
