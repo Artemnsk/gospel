@@ -8,7 +8,7 @@ const fs = require('fs');
 const path = require('path');
 const appDir = path.dirname(require.main.filename);
 // Define path to storage consists of gospel quotes.
-const storageFilePath = appDir + '/storage.json';
+const storageFilePath = appDir + '/../gospel/storage.json';
 
 router.use('/api', tokenVerification);
 

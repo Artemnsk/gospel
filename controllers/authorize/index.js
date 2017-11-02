@@ -11,7 +11,7 @@ const privateCredentials = require('../../credentials/private');
 const authRedirectURL = url.format({
     protocol: publicCredentials.protocol,
     hostname: publicCredentials.host,
-    pathname: '/authorize/complete'
+    pathname: '/gospel/authorize/complete'
 });
 
 router.get('/authorize/request', authorizeRequest);
