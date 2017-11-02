@@ -71,7 +71,7 @@ function authorizeComplete(req, res, next) {
             });
             response.on('end', function() {
                 // TODO: save token.
-                res.render('authorizationcompleted');
+                res.render(__dirname + '/../../views/authorizationcompleted');
             });
         });
         request.write(data);
